@@ -1,0 +1,67 @@
+const express= require("express");
+const app= express();
+const bodyParser=require('body-parser')
+const Escolaridade = require("./models/Escolaridade");
+const bd = require("./models/bd");
+const Pedidos = require("./models/Pedidos");
+// const bd=require('./models/bd')
+const pessoas= require("./models/CadPessoas");
+
+
+app.use(require("cors")());
+
+
+    //config body parser    
+    app.use(bodyParser.urlencoded({extended:false}))
+    app.use(bodyParser.json())
+ 
+    //teste de consumir a api da tabela ERN_T_CAD_ESCOLARIDADE
+    app.get('/home', function(req,res){
+        Escolaridade.findAll({attributes:["ID_ESCOLARIDADE","DESCRICAO","STATUS"]}
+        ).then(function(cadEscolar){
+            res.send(cadEscolar);
+            
+        })
+       
+    });
+    // Pedidos.findAll({attributes:["ID_PESSOA","DATA_PEDIDO","DATA_PAGAMENTO"]}).then(function(ped){
+    //         res.send(ped);   
+    //     })
+
+     //rota de pegar boletos gerados e pagos 
+    app.get('/boletospagos',function(req,res){
+        bd.query("select cadp.NOME, cadp.CPF,ped.ID_PESSOA,ped.DATA_PEDIDO,ped.DATA_PAGAMENTO,ped.MENSAGEM_PAGAMENTO,ped.TIPO_PAGAMENTO from ERN_T_MOV_PEDIDO as ped inner join ERN_T_CAD_PESSOA as cadp on ped.ID_PESSOA = cadp.ID_PESSOA where MENSAGEM_PAGAMENTO='Autorizado' and DATA_PAGAMENTO != '0000-00-00 00:00:00'",
+        () => {
+            console.log(Pedidos);
+        }).
+        then(function(ped){
+            res.send(ped); 
+        })
+    });
+    
+
+    
+    app.get('/inner',function(req,res){
+         Pedidos.findAll({
+             include:{
+                 model:pessoas,
+                 required:true,
+                 attributes: ['NOME'], 
+             },
+             where:{
+                 MENSAGEM_PAGAMENTO: 'Autorizado'
+                 }, 
+         }).then(Pedidos=>console.table(Pedidos));        
+         });
+
+
+
+
+
+
+
+    app.listen(8081);
+
+         
+    
+        
