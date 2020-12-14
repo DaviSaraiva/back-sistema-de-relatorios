@@ -3,14 +3,15 @@ const bd=require('./bd')
 const pedidos = bd.sequelize.define('pedidos', {    
     ID_PEDIDO: {
         type: bd.Sequelize.BIGINT,
-       
+        primaryKey: true,
+
     },
     ID_EMPRESA: {
         type: bd.Sequelize.INTEGER
     },
     ID_PESSOA: {
         type: bd.Sequelize.BIGINT,
-        primaryKey: true,
+        
     },
     DATA_PEDIDO:{
         type:bd.Sequelize.DATE

@@ -16,10 +16,11 @@ const pessoas = bd.sequelize.define('pessoas', {
         type:bd.Sequelize.INTEGER
     },
     CPF:{
-        type:bd.Sequelize.STRING
+        type:bd.Sequelize.STRING,
     },
     NOME:{
-        type:bd.Sequelize.STRING
+        type:bd.Sequelize.STRING,
+
     },
     RG:{
         type:bd.Sequelize.STRING
