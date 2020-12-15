@@ -87,7 +87,7 @@ app.use(require("cors")());
                         foreignKey: 'ID_PESSOA'
                       }); 
                      Pedidos.findAll({
-                         attributes:["ID_PESSOA","ID_PEDIDO","DATA_PEDIDO","MENSAGEM_PAGAMENTO","STATUS_PAGAMENTO","TIPO_PEDIDO","TIPO_PAGAMENTO","VALOR_TOTAL"],
+                         attributes:["ID_PESSOA","ID_PEDIDO","DATA_PEDIDO","DATA_PAGAMENTO","MENSAGEM_PAGAMENTO","STATUS_PAGAMENTO","TIPO_PEDIDO","TIPO_PAGAMENTO","VALOR_TOTAL"],
                             include:[{
                             model:pessoas,
                             required:true,
@@ -96,7 +96,9 @@ app.use(require("cors")());
                             TIPO_PAGAMENTO:2,
                             [Op.or]:[
                                 {STATUS_PAGAMENTO:8},
-                                {STATUS_PAGAMENTO:9}
+                                {STATUS_PAGAMENTO:9},
+                                {STATUS_PAGAMENTO:0}
+
                             ]
                           }
                      }).then(function(ped){
@@ -118,7 +120,6 @@ app.use(require("cors")());
                          }], where:{
                             TIPO_PAGAMENTO:2,
                             [Op.or]:[
-                                {STATUS_PAGAMENTO:0},
                                 {STATUS_PAGAMENTO:1}
                             ]
                             
