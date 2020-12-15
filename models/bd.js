@@ -1,6 +1,6 @@
 const Sequelize=require('sequelize')
-const sequelize= new Sequelize('bdtransmob_dv1','bdtransmob_dv1','Trans12#$Mobi',{
-    host:"bdtransmob_dv1.mysql.dbaas.com.br",
+const sequelize= new Sequelize('ernadmin_bd_transmobi','ernadmin_transmobi_user','09!@Mobi2020#$87',{
+    host:"186.249.33.194",
     dialect: 'mysql'
 })  
 
