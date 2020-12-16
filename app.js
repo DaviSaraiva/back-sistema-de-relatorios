@@ -15,7 +15,8 @@ app.use(require("cors")());
     //config body parser    
     app.use(bodyParser.urlencoded({extended:false}))
     app.use(bodyParser.json())
- 
+
+    
     //TESTE de consumir a api da tabela ERN_T_CAD_ESCOLARIDADE
     app.get('/home', function(req,res){
         Escolaridade.findAll({attributes:["ID_ESCOLARIDADE","DESCRICAO","STATUS"]}
