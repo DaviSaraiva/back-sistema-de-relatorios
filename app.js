@@ -291,9 +291,35 @@ app.use(require("cors")());
             res.send(ped); 
             });         
     });
+       
     
+    app.post('/finaceirogeral',function(req,res){
+        const {inicial,final,tipo,status} = req.body;
+        var data1=inicial;
+        var data2=final;
+        var TipoPedido=tipo;
+        var sta=status;
+
+        Pedidos.findAll({
+            required:false,
+            attributes:[
+            "TIPO_PEDIDO","STATUS_PAGAMENTO",
+            [sequelize.fn('COUNT',sequelize.col('TIPO_PEDIDO')),'Quantidade_de_Pedido'],
+            [sequelize.fn('SUM', sequelize.col('VALOR_TOTAL')), 'Valor_Total']
+        ],where:{ 
+                TIPO_PEDIDO:TipoPedido,
+                STATUS_PAGAMENTO:sta,
+                DATA_PAGAMENTO:{
+                    [Op.between]:[data1, data2],
+                },
+            },
+        }).then(function(ped){
+            res.send(ped); 
+        }); 
+    }); 
     
-    //financeiro vendas valores dos cartoes.
+
+
     app.post('/finaceiroCartao2',function(req,res){
         
         const {inicial,final} = req.body;
@@ -343,7 +369,7 @@ app.use(require("cors")());
         }).then(function(ped){
             res.send(ped); 
         }); 
-    });  
+    }); 
 
     
 
