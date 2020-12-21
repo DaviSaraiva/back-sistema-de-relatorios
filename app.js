@@ -309,7 +309,7 @@ app.use(require("cors")());
         ],where:{ 
                 TIPO_PEDIDO:TipoPedido,
                 STATUS_PAGAMENTO:sta,
-                DATA_PAGAMENTO:{
+                DATA_PEDIDO:{
                     [Op.between]:[data1, data2],
                 },
             },
