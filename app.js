@@ -8,10 +8,12 @@ const pessoasbeneficio=require("./models/CadPessoaBeneficio");
 const { sequelize } = require("./models/bd");
 const { Op } = require("sequelize");
 const bd= require("./models/bd")
+const cors = require("cors")
 
 
-app.use(require("cors")(
-    
+app.use(cors({
+    origin: 'http://139.162.233.71:3000'
+}
 ));
 
     //config body parser    
