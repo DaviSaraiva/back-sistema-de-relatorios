@@ -227,11 +227,11 @@ app.use(require("cors")(
 
 
     //creditos que foram Liberados das outra tabela
-    app.get('/credLiberados',function(req,res){
-        Pedidos.hasMany(pessoas, {
+    app.get('/credLiberados', function(req,res){
+        Pedidos.belongsTo(pessoas, {
             foreignKey: 'ID_PESSOA'
           }); 
-        Pedidos.hasMany(pessoasbeneficio, {
+        Pedidos.belongsTo(pessoasbeneficio, {
             foreignKey: 'ID_PESSOA'
           }); 
                 

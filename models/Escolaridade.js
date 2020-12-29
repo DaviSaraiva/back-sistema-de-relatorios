@@ -14,8 +14,11 @@ const escolaridade = bd.sequelize.define('Escolaridade', {
 },
 
     
-    {
+    {freezeTableName: true,
         tableName:'ERN_T_CAD_ESCOLARIDADE'
-    })
+    },
+   
+    );
+    
 
 module.exports = escolaridade

@@ -1,6 +1,6 @@
 const bd=require('./bd');
 
-const pessoasbeneficio = bd.sequelize.define('pessoasbeneficio',{
+const pessoasbeneficio = bd.sequelize.define('ERN_T_CAD_PESSOA_BENEFICIO',{
 
     ID_PESSOA_BENEFICIO: {
         type: bd.Sequelize.BIGINT,
@@ -22,9 +22,14 @@ const pessoasbeneficio = bd.sequelize.define('pessoasbeneficio',{
     }
 
 },
-    {
+{
+    freezeTableName: true
+},
+    {   
+        
         tableName:'ERN_T_CAD_PESSOA_BENEFICIO'
-
-    })
+    }
+    
+    );
 
     module.exports = pessoasbeneficio

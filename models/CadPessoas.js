@@ -1,11 +1,12 @@
 const bd=require('./bd')
 
-const pessoas = bd.sequelize.define('pessoas', {
+const pessoa = bd.sequelize.define('ERN_T_CAD_PESSOA', {
     ID_PESSOA: {
         type: bd.Sequelize.BIGINT,
         primaryKey: true,
 
     },
+
     ID_EMPRESA :{
         type: bd.Sequelize.INTEGER
     },
@@ -75,8 +76,13 @@ const pessoas = bd.sequelize.define('pessoas', {
     }
 },
 {
+    freezeTableName: true
+},
+{ 
     tableName:'ERN_T_CAD_PESSOA'
-})
+}
 
-module.exports = pessoas
+);
+
+module.exports = pessoa
 

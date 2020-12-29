@@ -1,6 +1,6 @@
 const bd=require('./bd')
 
-const pedidos = bd.sequelize.define('pedidos', {    
+const pedido = bd.sequelize.define('ERN_T_MOV_PEDIDO', {    
     ID_PEDIDO: {
         type: bd.Sequelize.BIGINT,
         primaryKey: true,
@@ -10,7 +10,7 @@ const pedidos = bd.sequelize.define('pedidos', {
         type: bd.Sequelize.INTEGER
     },
     ID_PESSOA: {
-        type: bd.Sequelize.BIGINT,
+        type: bd.Sequelize.BIGINT
         
     },
     DATA_PEDIDO:{
@@ -55,7 +55,13 @@ const pedidos = bd.sequelize.define('pedidos', {
         type:bd.Sequelize.TINYINT
     }
 },
+{
+    freezeTableName: true
+},
     {
+        
         tableName:'ERN_T_MOV_PEDIDO'
-    })
-module.exports = pedidos
+
+    },
+)   
+module.exports = pedido
