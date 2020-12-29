@@ -10,7 +10,9 @@ const { Op } = require("sequelize");
 const bd= require("./models/bd")
 
 
-app.use(require("cors")());
+app.use(require("cors")(
+    
+));
 
     //config body parser    
     app.use(bodyParser.urlencoded({extended:false}))
@@ -194,9 +196,9 @@ app.use(require("cors")());
         
         Pedidos.hasMany(pessoas, {
                         foreignKey: 'ID_PESSOA'
-                      }); 
-                    Pedidos.hasMany(pessoasbeneficio, {
-                        foreignKey: 'ID_PESSOA_BENEFICIO'
+            }); 
+        Pedidos.hasMany(pessoasbeneficio, {
+                        foreignKey: 'ID_PESSOA'
                       }); 
 
          Pedidos.findAll({
@@ -230,7 +232,7 @@ app.use(require("cors")());
             foreignKey: 'ID_PESSOA'
           }); 
         Pedidos.hasMany(pessoasbeneficio, {
-            foreignKey: 'ID_PESSOA_BENEFICIO'
+            foreignKey: 'ID_PESSOA'
           }); 
                 
     Pedidos.findAll({
@@ -266,7 +268,7 @@ app.use(require("cors")());
             foreignKey: 'ID_PESSOA'
           }); 
         Pedidos.hasMany(pessoasbeneficio, {
-            foreignKey: 'ID_PESSOA_BENEFICIO'
+            foreignKey: 'ID_PESSOA'
           }); 
 
             Pedidos.findAll({
@@ -320,57 +322,7 @@ app.use(require("cors")());
     
 
 
-    app.post('/finaceiroCartao2',function(req,res){
-        
-        const {inicial,final} = req.body;
-        var data1=inicial;
-        var data2=final;
-        
-        Pedidos.findAll({
-            attributes:[
-            "TIPO_PEDIDO",
-            [sequelize.fn('COUNT',sequelize.col('TIPO_PEDIDO')),'Quantidade_de_Pedido'],
-            [sequelize.fn('SUM', sequelize.col('VALOR_TOTAL')), 'Valor_Total']
-
-            ],where:{ 
-                TIPO_PEDIDO:1,
-                [Op.or]:[
-                    {STATUS_PAGAMENTO:1}
-                ],
-                DATA_PAGAMENTO:{
-                    [Op.between]:[data1, data2]
-                },   
-            }
-        }).then(function(ped){
-            res.send(ped); 
-            
-        });   
-    });  
     
-     //financeiro vendas valores dos creditos.
-     app.post('/finaceiroRecarga',function(req,res){
-        const {inicial,final} = req.body;
-        var data1=inicial;
-        var data2=final;
-
-        Pedidos.findAll({
-            required:false,
-            attributes:[
-            "TIPO_PEDIDO",
-            [sequelize.fn('COUNT',sequelize.col('TIPO_PEDIDO')),'Quantidade_de_Pedido'],
-            [sequelize.fn('SUM', sequelize.col('VALOR_TOTAL')), 'Valor_Total']
-        ],where:{ 
-                TIPO_PEDIDO:0,
-                STATUS_PAGAMENTO:1,
-                DATA_PAGAMENTO:{
-                    [Op.between]:[data1, data2],
-                },
-            },
-        }).then(function(ped){
-            res.send(ped); 
-        }); 
-    }); 
-
     
 
     app.listen(8081);

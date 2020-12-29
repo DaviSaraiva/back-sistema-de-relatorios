@@ -9,7 +9,7 @@ const pessoasbeneficio = bd.sequelize.define('pessoasbeneficio',{
     },
     ID_PESSOA: {
         type: bd.Sequelize.BIGINT,
-
+        foreignkey:true,
     },  
     ID_BENEFICIO:{
         type:bd.Sequelize.INTEGER
