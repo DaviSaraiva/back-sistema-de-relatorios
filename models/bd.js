@@ -1,7 +1,7 @@
 const Sequelize=require('sequelize')
-const sequelize= new Sequelize('ernadmin_bd_transmobi','ernadmin_transmobi_user','09!@Mobi2020#$87',{
-    host:"186.249.33.194",
-    dialect: 'mysql',
+const sequelize= new Sequelize('#','#','#',{
+    host:"#",
+    dialect: '#',
 })  
 
 sequelize.authenticate().then(function(){
